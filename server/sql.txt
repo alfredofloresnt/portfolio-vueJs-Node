@@ -1,0 +1,31 @@
+MySQL:
+
+create database curriculum;
+
+CREATE TABLE `curriculum`.`skills` (
+	idSkill int not null auto_increment,
+	name varchar(25) not null,
+	primary key (idSkill)
+);
+
+CREATE TABLE `curriculum`.`experience` (
+  `idExperience` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `description` VARCHAR(255) NULL,
+  `link` VARCHAR(255) NULL,
+  PRIMARY KEY (`idExperience`));
+
+CREATE TABLE `curriculum`.`information` (
+  `idInformation` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `lastName` VARCHAR(45) NULL,
+  `birthdate` VARCHAR(45) NULL,
+  `eductation` VARCHAR(255) NULL,
+  PRIMARY KEY (`idInformation`));
+
+CREATE TABLE `curriculum`.`comments` (
+  `idComments` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `comment` VARCHAR(255) NULL DEFAULT 'No message',
+  `date` TIMESTAMP NULL,
+  PRIMARY KEY (`idComments`));

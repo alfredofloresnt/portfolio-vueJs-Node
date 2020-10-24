@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>1482</title>
+  <link rel="stylesheet" href="./styles/core.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+    integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
+    integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Alfredo Flores</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container" id="app">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="text-center">Portfolio - Alfredo Flores</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <p>¿Quien soy?</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, est! Architecto esse est ad, atque modi nisi
+          provident iusto consectetur explicabo. Quasi ipsa fuga nostrum optio cupiditate similique voluptatem hic.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 offset-lg-6">
+        <p>Educacion</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, est! Architecto esse est ad, atque modi nisi
+          provident iusto consectetur explicabo. Quasi ipsa fuga nostrum optio cupiditate similique voluptatem hic.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-24">
+        <h2>Experiencia</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div v-for="item in projects" :key="item.title">
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" :src="item.img" alt="Card image cap" height="200px" style="object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <div id="hide">
+                <button class="btn btn-primary" v-on:click="item.isHidden = !item.isHidden">Clic para
+                  esconder y
+                  mostrar</button>
+                <p class="card-text" v-if="!item.isHidden">{{item.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="contact">
+      <form v-on:submit.prevent>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="email">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Example textarea</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" v-on:click="postContact">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            The message has been sent!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item">Cras justo odio</li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Morbi leo risus</li>
+      <li class="list-group-item">Porta ac consectetur ac</li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    var example1 = new Vue({
+      el: '#app',
+      data: {
+        projects: [],
+        skills: [],
+        email: "abcd",
+        message: ""
+      },
+      mounted() {
+        axios
+          .get('http://localhost:4001/projects')
+          .then(response => {
+            let x = response.data.projects.map((element) => { var obj = Object.assign({}, element); obj.isHidden = true; console.log(obj); return obj })
+            this.projects = x
+          })
+      },
+      methods: {
+        postContact: async function () {
+          axios
+            .post('http://localhost:4001/contact', { email: this.email, message: this.message }).then(() => $('#exampleModal').modal('show'))
+
+        }
+      }
+    });
+
+  </script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+    integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+    crossorigin="anonymous"></script>
+  <!-- End Sctips -->
+</body>
+
+</html>
