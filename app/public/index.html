@@ -29,6 +29,12 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/projects.html">Projects</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/contact.html">Contact Me</a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -55,24 +61,6 @@
     <div class="row">
       <div class="col-lg-24">
         <h2>Experiencia</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div v-for="item in projects" :key="item.title">
-        <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" :src="item.img" alt="Card image cap" height="200px" style="object-fit: cover;">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <div id="hide">
-                <button class="btn btn-primary" v-on:click="item.isHidden = !item.isHidden">Clic para
-                  esconder y
-                  mostrar</button>
-                <p class="card-text" v-if="!item.isHidden">{{item.description}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="row" id="contact">
