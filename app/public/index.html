@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>1482</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="./styles/core.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -38,30 +39,78 @@
       </ul>
     </div>
   </nav>
-  <div class="container" id="app">
+  <div id="app">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="text-center">Portfolio - Alfredo Flores</h1>
+        <div class="bg-wrapper">
+          <div class="overlay">
+            <div style="height: 100%;">
+              <div class="align-content" style="height: 100%;">
+                <div>
+                  <h1>Alfredo Flores</h1>
+                  <h4>Software engineer</h4>
+                  <h4>Portfolio</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-6">
-        <p>¿Quien soy?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, est! Architecto esse est ad, atque modi nisi
-          provident iusto consectetur explicabo. Quasi ipsa fuga nostrum optio cupiditate similique voluptatem hic.</p>
+    <div class="container">
+      <div class="section row">
+        <div class="col-lg-6">
+          <h2>General Information</h2>
+          <div v-for="item in information" :key="item.idInformation">
+            <h5>{{item.name}}: {{item.value}}</h5>
+          </div>
+        </div>
+        <div class="col-lg-6 offset-lg-0 ">
+          <h2>Skills</h2>
+          <ul class="list-group">
+            <li class="list-group-item" v-for="item in skills" :key="item.name">{{item.name}}</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 offset-lg-6">
-        <p>Educacion</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, est! Architecto esse est ad, atque modi nisi
-          provident iusto consectetur explicabo. Quasi ipsa fuga nostrum optio cupiditate similique voluptatem hic.</p>
+
+
+
+
+
+
+      <div class="section row">
+        <div class="col-lg-12">
+          <h2>Experience</h2>
+        </div>
+        <div class="col-lg-12">
+          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleCaptions" :data-slide-to="index" v-for="(item, index) in experience"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item" v-for="(item, index) in experience" :class="{ active: index==0 }">
+                <img
+                  :src="item.link"
+                  style="object-fit:cover" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block" >
+                  <h5 style="color: rgb(62, 62, 255);">{{item.name}}</h5>
+                  <p style="color: rgb(62, 62, 255);">{{item.description}}</p>
+                </div>
+              </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
+        </div>
       </div>
-    </div>
-    <div>
-      <ul class="list-group">
-        <li class="list-group-item" v-for="item in skills" :key="item.title">{{item.name}}</li>
-      </ul>
     </div>
   </div>
 
@@ -74,23 +123,28 @@
     var example1 = new Vue({
       el: '#app',
       data: {
-        projects: [],
+        information: [],
         skills: [],
-        email: "abcd",
+        experience: [],
+        email: "",
         message: ""
       },
       mounted() {
         axios
-          .get('http://localhost:4001/projects')
+          .get('http://localhost:4001/info')
           .then(response => {
-            let x = response.data.projects.map((element) => { var obj = Object.assign({}, element); obj.isHidden = true; console.log(obj); return obj })
-            this.projects = x
+            this.information = response.data.info;
           })
         axios
           .get('http://localhost:4001/skills')
           .then(response => {
-
-            this.skills = response.data.skills
+            this.skills = response.data.skills;
+          })
+        axios
+          .get('http://localhost:4001/experience')
+          .then(response => {
+            this.experience = response.data.experience;
+            console.log(this.experience)
           })
       },
 

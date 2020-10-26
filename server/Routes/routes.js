@@ -14,8 +14,8 @@ app.get("/info", function (req, res) {
 })
 
 app.get("/experience", function (req, res) {
-    Model.getExpereience((data)=>{
-        res.json({info: data})
+    Model.getExperience((data)=>{
+        res.json({experience: data})
     })
 })
 

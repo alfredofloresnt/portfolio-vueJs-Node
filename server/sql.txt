@@ -29,3 +29,10 @@ CREATE TABLE `curriculum`.`comments` (
   `comment` VARCHAR(255) NULL DEFAULT 'No message',
   `date` TIMESTAMP NULL,
   PRIMARY KEY (`idComments`));
+
+  CREATE TABLE `curriculum`.`information` (
+	idInformation int not null auto_increment,
+	name varchar(25),
+	value varchar(255),
+	PRIMARY KEY(idInformation)
+);

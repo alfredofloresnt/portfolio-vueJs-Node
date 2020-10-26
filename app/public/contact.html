@@ -4,9 +4,11 @@
 <head>
   <meta charset="utf-8">
   <title>1482</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="./styles/core.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
     integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
@@ -27,7 +29,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="/projects.html">Projects</a>
@@ -38,15 +40,18 @@
       </ul>
     </div>
   </nav>
-  <div class="container" id="app">
-    <div class="row" id="contact">
+  <div class="container section" id="app">
+    <div class="d-flex justify-content-center">
+      <h4>Contact me</h4>
+    </div>
+    <div class="d-flex justify-content-center" id="contact">
       <form v-on:submit.prevent>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="email">
+          <input type="email" class="form-control" id="exampleInputEmail1" v-model="email">
         </div>
         <div class="form-group">
-          <label for="exampleFormControlTextarea1">Example textarea</label>
+          <label for="exampleFormControlTextarea1">Message</label>
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="message"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" v-on:click="postContact">Submit</button>
@@ -81,7 +86,7 @@
       data: {
         projects: [],
         skills: [],
-        email: "abcd",
+        email: "",
         message: ""
       },
       mounted() {

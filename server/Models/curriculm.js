@@ -29,13 +29,6 @@ exports.getSkills = (callback) => {
   });
 }
 
-exports.getExperience = (callback) => {
-  connection.query("SELECT * FROM experience", function (error, results, fields) {
-    if (error) throw error;
-    callback(results)
-  });
-}
-
 exports.getProjects = (callback) => {
   connection.query("SELECT * FROM projects", function (error, results, fields) {
     if (error) throw error;
